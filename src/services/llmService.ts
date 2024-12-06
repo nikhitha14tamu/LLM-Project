@@ -106,7 +106,7 @@ export async function migrateCodeWithConfidence(
 // Function to migrate a single chunk
 async function migrateChunk(chunk: string): Promise<{ migratedCode: string; confidence: number }> {
     try {
-        const apiKey = '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'; // Replace with your actual API key
+        const apiKey = 'Key'; // Replace with your actual API key
         console.debug('Sending chunk to LLM:', chunk);
 
         const response = await axios.post(
@@ -182,7 +182,7 @@ export async function callLLMForFixingMypyErrors(
 ): Promise<{ fixedCode: string; confidence: number }> {
     const oldconf = confidence;
     try {
-        const apiKey = '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'; // Replace with your actual API key
+        const apiKey = 'key'; // Replace with your actual API key
         console.debug('Entering LLM fixer with code and errors:', { code, errors });
 
         const response = await axios.post(
