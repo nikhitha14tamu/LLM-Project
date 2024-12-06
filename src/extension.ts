@@ -5,7 +5,17 @@ import { runMypyCheck } from './utils/mypyRunner';
 import * as fs from 'fs';
 import * as path from 'path';
 import { exec, execSync } from 'child_process';
+import * as dotenv from 'dotenv';
 
+const workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
+const envFilePath = path.join(workspaceFolder, '.env');
+console.debug("WORKSPACE PATH",envFilePath);
+dotenv.config({ path: envFilePath });
+
+// Access the API key
+let apiKey = process.env.OPENAI_API_KEY;
+
+console.debug("API KEYYY",apiKey);
 
 // Helper function to replicate directory structure without duplicating `_py3`
 function replicateDirectoryStructureWithPythonMigration(

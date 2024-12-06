@@ -25,7 +25,13 @@
         "command": "pythonmigrator.migrateFiles",
         "title": "PythonMigrator: Migrate Files"
       }
-    ]
+    ],
+    "properties":{
+      "abc.apikey":{
+        "type":"string",
+        "default":"default string"
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -54,6 +60,7 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "dotenv": "^16.4.7",
     "esprima": "^4.0.1"
   }
 }

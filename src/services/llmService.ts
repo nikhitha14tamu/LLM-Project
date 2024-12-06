@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as vscode from 'vscode';
 import {
     extractFunctionDependencies,
     topologicalSort,
@@ -106,7 +107,13 @@ export async function migrateCodeWithConfidence(
 // Function to migrate a single chunk
 async function migrateChunk(chunk: string): Promise<{ migratedCode: string; confidence: number }> {
     try {
-        const apiKey = 'Key'; // Replace with your actual API key
+        // const apiKey = 'Key'; // Replace with your actual API key
+        // if (!apiKey) {
+        //     vscode.window.showErrorMessage('Please configure your OpenAI API key in the settings to use Python Migrator.');
+        //     // return { migratedCode: '', confidence: 0 }; // Return a default value or handle appropriately
+        // }
+        let apiKey = process.env.OPENAI_API_KEY;
+        console.debug(process.env.OPENAI_API_KEY);
         console.debug('Sending chunk to LLM:', chunk);
 
         const response = await axios.post(
@@ -182,9 +189,15 @@ export async function callLLMForFixingMypyErrors(
 ): Promise<{ fixedCode: string; confidence: number }> {
     const oldconf = confidence;
     try {
-        const apiKey = 'key'; // Replace with your actual API key
+        // const apiKey = vscode.workspace.getConfiguration('pythonMigrator').get<string>('apiKey') || '';
+        // if (!apiKey) {
+        //     vscode.window.showErrorMessage('Please configure your OpenAI API key in the settings to use Python Migrator.');
+        //     // return { migratedCode: '', confidence: 0 }; // Return a default value or handle appropriately
+        // }
+                
+ // Replace with your actual API key
         console.debug('Entering LLM fixer with code and errors:', { code, errors });
-
+        let apiKey = process.env.OPENAI_API_KEY;
         const response = await axios.post(
             'https://api.openai.com/v1/chat/completions',
             {
